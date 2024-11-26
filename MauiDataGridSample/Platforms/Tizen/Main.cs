@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace MauiDataGridSample
+namespace ToCIVP_II
 {
     internal class Program : MauiApplication
     {

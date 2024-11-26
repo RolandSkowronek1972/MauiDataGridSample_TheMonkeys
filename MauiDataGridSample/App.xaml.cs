@@ -1,4 +1,4 @@
-﻿namespace MauiDataGridSample
+﻿namespace ToCIVP_II
 {
     public partial class App : Application
     {

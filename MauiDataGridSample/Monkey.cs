@@ -1,4 +1,4 @@
-﻿namespace MauiDataGridSample
+﻿namespace ToCIVP_II
 {
     public class Monkey
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 
-namespace MauiDataGridSample
+namespace ToCIVP_II
 {
     // Plugin repo: https://github.com/akgulebubekir/Maui.DataGrid
     public partial class MainPage : ContentPage

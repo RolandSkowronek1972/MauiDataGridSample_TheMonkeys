@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace MauiDataGridSample
+namespace ToCIVP_II
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

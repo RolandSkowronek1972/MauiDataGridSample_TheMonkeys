@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace MauiDataGridSample
+namespace ToCIVP_II
 {
     public static class MauiProgram
     {

@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MauiDataGridSample
+namespace ToCIVP_II
 {
     public class Program
     {
