@@ -5,28 +5,20 @@
              x:Class="ToCIVP_II.MainPage">
 
     <Grid RowDefinitions="70,*">
-        <Button Text="Clear monkeys" Clicked="Button_Clicked" Margin="10" />
         
-        <dg:DataGrid Grid.Row="1" ItemsSource="{Binding Monkeys}" SelectionEnabled="True" SelectedItem="{Binding SelectedMonkey}"
+
+        <dg:DataGrid Grid.Row="1" ItemsSource="{Binding ProductsList}" SelectionEnabled="True" SelectedItem="{Binding SelectedMonkey}"
                      RowHeight="70" HeaderHeight="50" PullToRefreshCommand="{Binding RefreshCommand}"
                      IsRefreshing="{Binding IsRefreshing}" HeaderBackground="Red">
             <dg:DataGrid.NoDataView>
                 <Label Text="Nothing to see here 🙈" HorizontalOptions="Center" VerticalOptions="Center" />
             </dg:DataGrid.NoDataView>
             <dg:DataGrid.Columns>
-                <dg:DataGridColumn Title="Image" PropertyName="Image" Width="150" SortingEnabled="False">
-                    <dg:DataGridColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding}" HorizontalOptions="Center" VerticalOptions="Center"
-                               Aspect="AspectFit" HeightRequest="60" />
-                        </DataTemplate>
-                    </dg:DataGridColumn.CellTemplate>
-                </dg:DataGridColumn>
                 <dg:DataGridColumn Title="Name" PropertyName="Name" />
-                <dg:DataGridColumn Title="Location" PropertyName="Location" />
-                <dg:DataGridColumn Title="Population" PropertyName="Population" />
-                <dg:DataGridColumn Title="Latitude" PropertyName="Latitude" />
-                <dg:DataGridColumn Title="Longitude" PropertyName="Longitude" />
+                <dg:DataGridColumn Title="Category" PropertyName="Category" />
+                <dg:DataGridColumn Title="Carbohydrates" PropertyName="Carbohydrates" />
+                <dg:DataGridColumn Title="Calories" PropertyName="Calories" />
+                
             </dg:DataGrid.Columns>
             <dg:DataGrid.RowsBackgroundColorPalette>
                 <dg:PaletteCollection>

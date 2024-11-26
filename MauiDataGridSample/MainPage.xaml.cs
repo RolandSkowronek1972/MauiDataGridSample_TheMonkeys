@@ -9,9 +9,11 @@ namespace ToCIVP_II
         private readonly HttpClient httpClient = new();
 
         public bool IsRefreshing { get; set; }
-        public ObservableCollection<Monkey> Monkeys { get; set; } = new();
+        public ObservableCollection<TheProducts> ProductsList { get; set; } = new();
+        public ObservableCollection<TheProducts> InitialList { get; set; } = new();
+
         public Command RefreshCommand { get; set; }
-        public Monkey SelectedMonkey { get; set; }
+        
 
         public MainPage()
         {
@@ -20,7 +22,7 @@ namespace ToCIVP_II
                 // Simulate delay
                 await Task.Delay(2000);
 
-                await LoadMonkeys();
+                await LoadProductsList();
 
                 IsRefreshing = false;
                 OnPropertyChanged(nameof(IsRefreshing));
@@ -35,24 +37,25 @@ namespace ToCIVP_II
         {
             base.OnNavigatedTo(args);
 
-            await LoadMonkeys();
+            await LoadProductsList();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+       
+        private async Task LoadProductsList()
         {
-            Monkeys.Clear();
-        }
+            var productsList = await httpClient.GetFromJsonAsync<TheProducts[]>("https://api.jsonsilo.com/public/d1395a15-a054-44dd-bae3-7160968e1c19");
+            
 
-        private async Task LoadMonkeys()
-        {
-            var monkeys = await httpClient.GetFromJsonAsync<Monkey[]>("https://montemagno.com/monkeys.json");
-
-            Monkeys.Clear();
-
-            foreach (Monkey monkey in monkeys)
+            
+            ProductsList.Clear();
+            foreach (var product in productsList) 
             {
-                Monkeys.Add(monkey);
+                ProductsList.Add(product);
+                InitialList.Add(product);   
+
+
             }
+          
         }
     }
 }
