@@ -4,14 +4,13 @@ using System.Net.Http.Json;
 
 namespace ToCIVP_II
 {
-    // Plugin repo: https://github.com/akgulebubekir/Maui.DataGrid
+   
     public partial class MainPage : ContentPage
     {
         private readonly HttpClient httpClient = new();
 
         public bool IsRefreshing { get; set; }
         public ObservableCollection<TheProducts> ProductsList { get; set; } = new();
-        public IList<TheProducts> ProductsListAsList { get; set; } = new List<TheProducts>();
         public ObservableCollection<TheProducts> InitialList { get; set; } = new();
 
         public Command RefreshCommand { get; set; }
@@ -21,9 +20,7 @@ namespace ToCIVP_II
         {
             RefreshCommand = new Command(async () =>
             {
-                // Simulate delay
-                await Task.Delay(2000);
-
+                
                 await LoadProductsList();
 
                 IsRefreshing = false;
@@ -46,21 +43,37 @@ namespace ToCIVP_II
         private async Task LoadProductsList()
         {
             var productsList = await httpClient.GetFromJsonAsync<TheProducts[]>("https://api.jsonsilo.com/public/d1395a15-a054-44dd-bae3-7160968e1c19");
-            
+            int i = 0;
             ProductsList.Clear();
             foreach (var product in productsList) 
             {
+                i++;
                 ProductsList.Add(product);
                 InitialList.Add(product);
-               // ProductsListAsList.Add(product);
+            if (i == 10)
+                    break;
 
             }
           
         }
 
-        private async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        private async void loadToProductlist(List<TheProducts> thisList)
         {
-            var SerchingName = e.NewTextValue;
+
+            foreach (TheProducts Product in thisList)
+            {
+
+                ProductsList.Add(Product);
+            }
+
+        }
+        
+
+        private void OnTextChanged(object sender, EventArgs e)
+        {
+            SearchBar searchBar = (SearchBar)sender;
+            var SerchingName = searchBar.Text;
+            
             List<TheProducts> ShortInitialList = InitialList.Where(x => x.Name.Contains(SerchingName)).ToList();
             int ilosc = ShortInitialList.Count;
 
@@ -74,20 +87,6 @@ namespace ToCIVP_II
             {
                 loadToProductlist(ShortInitialList);
             }
-        }
-        private async void loadToProductlist(List<TheProducts> thisList)
-        {
-
-            foreach (TheProducts Product in thisList)
-            {
-
-                ProductsList.Add(Product);
-            }
-
-        }
-        private void OnEntryCompleted(object sender, EventArgs e)
-        {
-
         }
     }
 }
