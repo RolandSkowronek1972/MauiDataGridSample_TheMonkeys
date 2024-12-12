@@ -4,39 +4,57 @@
               xmlns:dg="clr-namespace:Maui.DataGrid;assembly=Maui.DataGrid"
              x:Class="ToCIVP_II.MainPage">
 
-    <Grid RowDefinitions="70,*">
-       
-        <SearchBar TextChanged="OnTextChanged" 
-                     BackgroundColor="LightBlue"
-  TextColor="Black"
-  FontAttributes="Bold"/>
-  
-            
-            <dg:DataGrid Grid.Row="1" ItemsSource="{Binding ProductsList}" SelectionEnabled="True" SelectedItem="{Binding SelectedMonkey}"
-                     RowHeight="70" HeaderHeight="50" PullToRefreshCommand="{Binding RefreshCommand}"
-                     IsRefreshing="{Binding IsRefreshing}" HeaderBackground="Red">
-            <dg:DataGrid.NoDataView>
-                <Label Text="Nothing to see here 🙈" HorizontalOptions="Center" VerticalOptions="Center" />
-            </dg:DataGrid.NoDataView>
-            <dg:DataGrid.Columns>
-                <dg:DataGridColumn Title="Name" PropertyName="Name" />
-                <dg:DataGridColumn Title="Category" PropertyName="Category" />
-                <dg:DataGridColumn Title="Carbohydrates" PropertyName="Carbohydrates" />
-                <dg:DataGridColumn Title="Calories" PropertyName="Calories" />
-                
-            </dg:DataGrid.Columns>
-            <dg:DataGrid.RowsBackgroundColorPalette>
-                <dg:PaletteCollection>
-                    <Color>#F2F2F2</Color>
-                    <Color>#FFFFFF</Color>
-                </dg:PaletteCollection>
-            </dg:DataGrid.RowsBackgroundColorPalette>
-            <dg:DataGrid.Resources>
-                <ResourceDictionary>
-                    <!--<conv:StreakToColorConverter x:Key="StreakToColorConverter" />-->
-                </ResourceDictionary>
-            </dg:DataGrid.Resources>
-        </dg:DataGrid>
-    </Grid>
+    <ScrollView>
 
+        <ListView ItemsSource="{Binding ProductsList}" VerticalScrollBarVisibility="Always" BackgroundColor="AntiqueWhite"
+                  SeparatorVisibility="Default">
+            <ListView.Header>
+                <StackLayout Orientation="Horizontal"
+                             BackgroundColor="LightGray">
+
+                    <Label Margin="10,10,0,0"
+                           VerticalOptions="StartAndExpand"
+                           Text="Szukaj"
+                           FontSize="12"
+                           TextColor="Black"
+                           FontAttributes="Bold" />
+                    <SearchBar TextChanged="OnTextChanged"
+
+                               HorizontalOptions="StartAndExpand"
+                                BackgroundColor="LightBlue"
+                                TextColor="Black"
+                                FontAttributes="Bold" />
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1"
+                           Text="{Binding Name}"
+                                   TextColor="Black"
+                           FontAttributes="Bold"
+                                   HorizontalTextAlignment="Start"
+                                   Margin="10" />
+                            <Label Grid.Column="2"
+
+                           Text="{Binding Id}"
+                           FontAttributes="Bold"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="End"
+                                    Margin="10" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ScrollView>
 </ContentPage>
