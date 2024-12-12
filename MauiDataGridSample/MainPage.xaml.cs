@@ -47,20 +47,18 @@ namespace ToCIVP_II
         {
             var productsList = await httpClient.GetFromJsonAsync<TheProducts[]>("https://api.jsonsilo.com/public/d1395a15-a054-44dd-bae3-7160968e1c19");
             
-
-            
             ProductsList.Clear();
             foreach (var product in productsList) 
             {
                 ProductsList.Add(product);
                 InitialList.Add(product);
-                ProductsListAsList.Add(product);
+               // ProductsListAsList.Add(product);
 
             }
           
         }
 
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        private async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             var SerchingName = e.NewTextValue;
             List<TheProducts> ShortInitialList = InitialList.Where(x => x.Name.Contains(SerchingName)).ToList();
@@ -77,12 +75,8 @@ namespace ToCIVP_II
                 loadToProductlist(ShortInitialList);
             }
         }
-        private void loadToProductlist(List<TheProducts> thisList)
+        private async void loadToProductlist(List<TheProducts> thisList)
         {
-
-
-
-
 
             foreach (TheProducts Product in thisList)
             {

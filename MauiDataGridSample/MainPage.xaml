@@ -10,7 +10,9 @@
             ReturnType="Next" 
             TextChanged="OnEntryTextChanged"
             Completed="OnEntryCompleted" 
-            
+            BackgroundColor="LightGray"
+            TextColor="Black"
+            FontAttributes="Bold"
             ClearButtonVisibility="WhileEditing"
             />
 
