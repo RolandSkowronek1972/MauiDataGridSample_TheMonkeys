@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections;
+using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 
 namespace ToCIVP_II
@@ -10,6 +11,7 @@ namespace ToCIVP_II
 
         public bool IsRefreshing { get; set; }
         public ObservableCollection<TheProducts> ProductsList { get; set; } = new();
+        public IList<TheProducts> ProductsListAsList { get; set; } = new List<TheProducts>();
         public ObservableCollection<TheProducts> InitialList { get; set; } = new();
 
         public Command RefreshCommand { get; set; }
@@ -51,11 +53,47 @@ namespace ToCIVP_II
             foreach (var product in productsList) 
             {
                 ProductsList.Add(product);
-                InitialList.Add(product);   
-
+                InitialList.Add(product);
+                ProductsListAsList.Add(product);
 
             }
           
+        }
+
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var SerchingName = e.NewTextValue;
+            List<TheProducts> ShortInitialList = InitialList.Where(x => x.Name.Contains(SerchingName)).ToList();
+            int ilosc = ShortInitialList.Count;
+
+            ProductsList.Clear();
+
+            if (String.IsNullOrEmpty(SerchingName))
+            {
+                loadToProductlist(InitialList.ToList());
+            }
+            else
+            {
+                loadToProductlist(ShortInitialList);
+            }
+        }
+        private void loadToProductlist(List<TheProducts> thisList)
+        {
+
+
+
+
+
+            foreach (TheProducts Product in thisList)
+            {
+
+                ProductsList.Add(Product);
+            }
+
+        }
+        private void OnEntryCompleted(object sender, EventArgs e)
+        {
+
         }
     }
 }

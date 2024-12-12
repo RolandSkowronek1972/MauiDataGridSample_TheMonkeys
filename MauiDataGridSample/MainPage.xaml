@@ -5,7 +5,14 @@
              x:Class="ToCIVP_II.MainPage">
 
     <Grid RowDefinitions="70,*">
-        
+        <Entry
+            x:Name="FirstNameEntry"
+            ReturnType="Next" 
+            TextChanged="OnEntryTextChanged"
+            Completed="OnEntryCompleted" 
+            
+            ClearButtonVisibility="WhileEditing"
+            />
 
         <dg:DataGrid Grid.Row="1" ItemsSource="{Binding ProductsList}" SelectionEnabled="True" SelectedItem="{Binding SelectedMonkey}"
                      RowHeight="70" HeaderHeight="50" PullToRefreshCommand="{Binding RefreshCommand}"
